@@ -2,3 +2,7 @@ My Multi Event
 --------------
 
 This is a server for a website to schedule multi-user events.
+
+Written for Gopher Gala 2016 by Andrew Sellers
+
+Probably requires Go 1.6
