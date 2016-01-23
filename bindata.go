@@ -33,7 +33,13 @@
 // assets/js/jquery-2.2.0.min.js
 // assets/js/materialize.js
 // assets/js/materialize.min.js
+// assets/tmpl/create.html
 // assets/tmpl/index.html
+// assets/tmpl/landing.html
+// assets/tmpl/modify.html
+// assets/tmpl/my_events.html
+// assets/tmpl/my_results.html
+// assets/tmpl/schedule.html
 // DO NOT EDIT!
 
 package main
@@ -654,10 +660,118 @@ func assetsJsMaterializeMinJs() (*asset, error) {
 	return a, err
 }
 
+// assetsTmplCreateHtml reads file data from disk. It returns an error on failure.
+func assetsTmplCreateHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/create.html"
+	name := "assets/tmpl/create.html"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetsTmplIndexHtml reads file data from disk. It returns an error on failure.
 func assetsTmplIndexHtml() (*asset, error) {
 	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/index.html"
 	name := "assets/tmpl/index.html"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsTmplLandingHtml reads file data from disk. It returns an error on failure.
+func assetsTmplLandingHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/landing.html"
+	name := "assets/tmpl/landing.html"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsTmplModifyHtml reads file data from disk. It returns an error on failure.
+func assetsTmplModifyHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/modify.html"
+	name := "assets/tmpl/modify.html"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsTmplMy_eventsHtml reads file data from disk. It returns an error on failure.
+func assetsTmplMy_eventsHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/my_events.html"
+	name := "assets/tmpl/my_events.html"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsTmplMy_resultsHtml reads file data from disk. It returns an error on failure.
+func assetsTmplMy_resultsHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/my_results.html"
+	name := "assets/tmpl/my_results.html"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsTmplScheduleHtml reads file data from disk. It returns an error on failure.
+func assetsTmplScheduleHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/schedule.html"
+	name := "assets/tmpl/schedule.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -757,7 +871,13 @@ var _bindata = map[string]func() (*asset, error){
 	"assets/js/jquery-2.2.0.min.js": assetsJsJquery220MinJs,
 	"assets/js/materialize.js": assetsJsMaterializeJs,
 	"assets/js/materialize.min.js": assetsJsMaterializeMinJs,
+	"assets/tmpl/create.html": assetsTmplCreateHtml,
 	"assets/tmpl/index.html": assetsTmplIndexHtml,
+	"assets/tmpl/landing.html": assetsTmplLandingHtml,
+	"assets/tmpl/modify.html": assetsTmplModifyHtml,
+	"assets/tmpl/my_events.html": assetsTmplMy_eventsHtml,
+	"assets/tmpl/my_results.html": assetsTmplMy_resultsHtml,
+	"assets/tmpl/schedule.html": assetsTmplScheduleHtml,
 }
 
 // AssetDir returns the file names below a certain
@@ -845,7 +965,13 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"materialize.min.js": &bintree{assetsJsMaterializeMinJs, map[string]*bintree{}},
 		}},
 		"tmpl": &bintree{nil, map[string]*bintree{
+			"create.html": &bintree{assetsTmplCreateHtml, map[string]*bintree{}},
 			"index.html": &bintree{assetsTmplIndexHtml, map[string]*bintree{}},
+			"landing.html": &bintree{assetsTmplLandingHtml, map[string]*bintree{}},
+			"modify.html": &bintree{assetsTmplModifyHtml, map[string]*bintree{}},
+			"my_events.html": &bintree{assetsTmplMy_eventsHtml, map[string]*bintree{}},
+			"my_results.html": &bintree{assetsTmplMy_resultsHtml, map[string]*bintree{}},
+			"schedule.html": &bintree{assetsTmplScheduleHtml, map[string]*bintree{}},
 		}},
 	}},
 }}

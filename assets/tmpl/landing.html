@@ -1,0 +1,54 @@
+{{ define "body" }}
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Create Events and Gather Attendees</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Blah blah blah, create an event and get people to RSVP. Cool stuff like Calendar syncing and stuff might not make it during the Gala.</h5>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 m3 offset-m2">
+          <div class="icon-block">
+            <h5>Quick Event</h5>
+
+            <ul>
+              <li>100 attendees</li>
+              <li>5 questions</li>
+              <li>7 Themes Available</li>
+              <li>Simple Registration Link</li>
+            </ul>
+            <a href="/create" class="waves-effect waves-light btn">Make Now</a>
+          </div>
+        </div>
+
+        <div class="col s12 m3 offset-m2">
+          <div class="icon-block">
+            <h5>Premium Event</h5>
+
+            <ul>
+              <li>1000+ attendees</li>
+              <li>25 questions</li>
+              <li>Multiple Times per Event</li>
+              <li>Custom Theme</li>
+              <li>Personalized Attendee Emails</li>
+            </ul>
+            <a class="waves-effect waves-light btn">Available Soon</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+  </div>
+{{ end }}
+
+{{ template "index.html" . }}

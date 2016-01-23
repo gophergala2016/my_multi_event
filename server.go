@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -13,6 +14,9 @@ func init() {
 	InitTmpl()
 }
 func InitTmpl() {
+	if Tmpl != nil && os.Getenv("DEV") == "" {
+		return
+	}
 	Tmpl = template.New("pages")
 	assets, _ := AssetDir("assets/tmpl")
 	for _, asset := range assets {
@@ -37,22 +41,27 @@ func main() {
 
 func FrontPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
-	Tmpl.ExecuteTemplate(w, "index.html", nil)
+	Tmpl.ExecuteTemplate(w, "landing.html", nil)
 }
 func SchedulePage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
+	Tmpl.ExecuteTemplate(w, "schedule.html", nil)
 }
 func CreatePage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
+	Tmpl.ExecuteTemplate(w, "create.html", nil)
 }
 func ResultsPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
+	Tmpl.ExecuteTemplate(w, "my_results.html", nil)
 }
 func ModifyPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
+	Tmpl.ExecuteTemplate(w, "modify.html", nil)
 }
 func MyEventsPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
+	Tmpl.ExecuteTemplate(w, "my_events.html", nil)
 }
 
 func AssetHandler(w http.ResponseWriter, r *http.Request) {
