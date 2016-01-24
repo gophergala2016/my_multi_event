@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -8,7 +9,7 @@ import (
 	"strings"
 )
 
-var Tmpl *template.Template
+var Tmpl map[string]*template.Template
 
 func init() {
 	InitTmpl()
@@ -17,11 +18,19 @@ func InitTmpl() {
 	if Tmpl != nil && os.Getenv("DEV") == "" {
 		return
 	}
-	Tmpl = template.New("pages")
-	assets, _ := AssetDir("assets/tmpl")
+	Tmpl = map[string]*template.Template{}
+	base := template.New("pages")
+	assets, _ := AssetDir("assets/tmpl/base")
 	for _, asset := range assets {
-		src, _ := Asset("assets/tmpl/" + asset)
-		fmt.Println(Tmpl.New(asset).Parse(string(src)))
+		src, _ := Asset("assets/tmpl/base/" + asset)
+		fmt.Println(base.New(asset).Parse(string(src)))
+	}
+	pages, _ := AssetDir("assets/tmpl/pages")
+	for _, page := range pages {
+		src, _ := Asset("assets/tmpl/pages/" + page)
+		tmpl, _ := base.Clone()
+		fmt.Println(tmpl.New(page).Parse(string(src)))
+		Tmpl[page] = tmpl
 	}
 }
 
@@ -29,10 +38,15 @@ func main() {
 	http.HandleFunc("/assets/", AssetHandler)
 
 	http.HandleFunc("/schedule", SchedulePage)
-	http.HandleFunc("/create", SchedulePage)
-	http.HandleFunc("/results", SchedulePage)
-	http.HandleFunc("/modify", SchedulePage)
+	http.HandleFunc("/create", CreatePage)
+	http.HandleFunc("/results", ResultsPage)
+	http.HandleFunc("/modify", ModifyPage)
 	http.HandleFunc("/my_events", MyEventsPage)
+
+	http.HandleFunc("/event", GetEvent)
+	http.HandleFunc("/responses", GetResponses)
+	http.HandleFunc("/create_event", SaveEvent)
+	http.HandleFunc("/create_response", SaveResponse)
 
 	http.HandleFunc("/", FrontPage)
 	http.ListenAndServe(":8000", nil)
@@ -41,27 +55,37 @@ func main() {
 
 func FrontPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
-	Tmpl.ExecuteTemplate(w, "landing.html", nil)
+	Tmpl["landing.html"].ExecuteTemplate(w, "landing.html", nil)
 }
 func SchedulePage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
-	Tmpl.ExecuteTemplate(w, "schedule.html", nil)
+	id := r.URL.Query().Get("event_id")
+	event, ok := Store.GetEvent(id)
+	if ok {
+		fmt.Println(Tmpl["schedule.html"].ExecuteTemplate(w, "schedule.html", map[string]interface{}{"Event": event}))
+	} else {
+		Tmpl["schedule.html"].ExecuteTemplate(w, "schedule.html", nil)
+	}
 }
 func CreatePage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
-	Tmpl.ExecuteTemplate(w, "create.html", nil)
+	m := map[string]string{
+		"NGApp":  "CreateApp",
+		"NGCtrl": "CreateEventCtrl",
+	}
+	fmt.Println(Tmpl["create.html"].ExecuteTemplate(w, "create.html", m))
 }
 func ResultsPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
-	Tmpl.ExecuteTemplate(w, "my_results.html", nil)
+	Tmpl["my_results.html"].ExecuteTemplate(w, "my_results.html", nil)
 }
 func ModifyPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
-	Tmpl.ExecuteTemplate(w, "modify.html", nil)
+	Tmpl["modify.html"].ExecuteTemplate(w, "modify.html", nil)
 }
 func MyEventsPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
-	Tmpl.ExecuteTemplate(w, "my_events.html", nil)
+	Tmpl["my_events.html"].ExecuteTemplate(w, "my_events.html", nil)
 }
 
 func AssetHandler(w http.ResponseWriter, r *http.Request) {
@@ -78,4 +102,36 @@ func AssetHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.Write(data)
 	}
+}
+
+func SaveEvent(w http.ResponseWriter, r *http.Request) {
+	evt := Event{}
+	json.NewDecoder(r.Body).Decode(&evt)
+	key := Store.NewEvent(evt)
+	json.NewEncoder(w).Encode(map[string]string{
+		"response": "ok",
+		"key":      key,
+	})
+}
+func SaveResponse(w http.ResponseWriter, r *http.Request) {
+	evt := Response{}
+	json.NewDecoder(r.Body).Decode(&evt)
+	Store.NewResponse(r.URL.Query().Get("event_id"), evt)
+	json.NewEncoder(w).Encode(map[string]string{
+		"response": "ok",
+	})
+}
+
+func GetEvent(w http.ResponseWriter, r *http.Request) {
+	event, ok := Store.GetEvent(r.URL.Query().Get("event_id"))
+	enc := json.NewEncoder(w)
+	if ok {
+		enc.Encode(event)
+	} else {
+		w.WriteHeader(404)
+	}
+}
+func GetResponses(w http.ResponseWriter, r *http.Request) {
+	resp := Store.GetResponses(r.URL.Query().Get("event_id"))
+	json.NewEncoder(w).Encode(resp)
 }

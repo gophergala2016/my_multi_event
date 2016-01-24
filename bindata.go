@@ -30,16 +30,23 @@
 // assets/font/roboto/Roboto-Thin.woff2
 // assets/js/angular-materialize.js
 // assets/js/angular.min.js
+// assets/js/create-app.js
 // assets/js/jquery-2.2.0.min.js
+// assets/js/lodash.js
 // assets/js/materialize.js
 // assets/js/materialize.min.js
+// assets/js/picker.date.js
+// assets/js/picker.js
+// assets/js/picker.time.js
+// assets/js/schedule.js
+// assets/tmpl/base/index.html
 // assets/tmpl/create.html
-// assets/tmpl/index.html
-// assets/tmpl/landing.html
-// assets/tmpl/modify.html
-// assets/tmpl/my_events.html
-// assets/tmpl/my_results.html
-// assets/tmpl/schedule.html
+// assets/tmpl/pages/create.html
+// assets/tmpl/pages/landing.html
+// assets/tmpl/pages/modify.html
+// assets/tmpl/pages/my_events.html
+// assets/tmpl/pages/my_results.html
+// assets/tmpl/pages/schedule.html
 // DO NOT EDIT!
 
 package main
@@ -606,10 +613,46 @@ func assetsJsAngularMinJs() (*asset, error) {
 	return a, err
 }
 
+// assetsJsCreateAppJs reads file data from disk. It returns an error on failure.
+func assetsJsCreateAppJs() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/js/create-app.js"
+	name := "assets/js/create-app.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetsJsJquery220MinJs reads file data from disk. It returns an error on failure.
 func assetsJsJquery220MinJs() (*asset, error) {
 	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/js/jquery-2.2.0.min.js"
 	name := "assets/js/jquery-2.2.0.min.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsJsLodashJs reads file data from disk. It returns an error on failure.
+func assetsJsLodashJs() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/js/lodash.js"
+	name := "assets/js/lodash.js"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -660,6 +703,96 @@ func assetsJsMaterializeMinJs() (*asset, error) {
 	return a, err
 }
 
+// assetsJsPickerDateJs reads file data from disk. It returns an error on failure.
+func assetsJsPickerDateJs() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/js/picker.date.js"
+	name := "assets/js/picker.date.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsJsPickerJs reads file data from disk. It returns an error on failure.
+func assetsJsPickerJs() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/js/picker.js"
+	name := "assets/js/picker.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsJsPickerTimeJs reads file data from disk. It returns an error on failure.
+func assetsJsPickerTimeJs() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/js/picker.time.js"
+	name := "assets/js/picker.time.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsJsScheduleJs reads file data from disk. It returns an error on failure.
+func assetsJsScheduleJs() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/js/schedule.js"
+	name := "assets/js/schedule.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetsTmplBaseIndexHtml reads file data from disk. It returns an error on failure.
+func assetsTmplBaseIndexHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/base/index.html"
+	name := "assets/tmpl/base/index.html"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetsTmplCreateHtml reads file data from disk. It returns an error on failure.
 func assetsTmplCreateHtml() (*asset, error) {
 	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/create.html"
@@ -678,10 +811,10 @@ func assetsTmplCreateHtml() (*asset, error) {
 	return a, err
 }
 
-// assetsTmplIndexHtml reads file data from disk. It returns an error on failure.
-func assetsTmplIndexHtml() (*asset, error) {
-	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/index.html"
-	name := "assets/tmpl/index.html"
+// assetsTmplPagesCreateHtml reads file data from disk. It returns an error on failure.
+func assetsTmplPagesCreateHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/pages/create.html"
+	name := "assets/tmpl/pages/create.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -696,10 +829,10 @@ func assetsTmplIndexHtml() (*asset, error) {
 	return a, err
 }
 
-// assetsTmplLandingHtml reads file data from disk. It returns an error on failure.
-func assetsTmplLandingHtml() (*asset, error) {
-	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/landing.html"
-	name := "assets/tmpl/landing.html"
+// assetsTmplPagesLandingHtml reads file data from disk. It returns an error on failure.
+func assetsTmplPagesLandingHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/pages/landing.html"
+	name := "assets/tmpl/pages/landing.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -714,10 +847,10 @@ func assetsTmplLandingHtml() (*asset, error) {
 	return a, err
 }
 
-// assetsTmplModifyHtml reads file data from disk. It returns an error on failure.
-func assetsTmplModifyHtml() (*asset, error) {
-	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/modify.html"
-	name := "assets/tmpl/modify.html"
+// assetsTmplPagesModifyHtml reads file data from disk. It returns an error on failure.
+func assetsTmplPagesModifyHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/pages/modify.html"
+	name := "assets/tmpl/pages/modify.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -732,10 +865,10 @@ func assetsTmplModifyHtml() (*asset, error) {
 	return a, err
 }
 
-// assetsTmplMy_eventsHtml reads file data from disk. It returns an error on failure.
-func assetsTmplMy_eventsHtml() (*asset, error) {
-	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/my_events.html"
-	name := "assets/tmpl/my_events.html"
+// assetsTmplPagesMy_eventsHtml reads file data from disk. It returns an error on failure.
+func assetsTmplPagesMy_eventsHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/pages/my_events.html"
+	name := "assets/tmpl/pages/my_events.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -750,10 +883,10 @@ func assetsTmplMy_eventsHtml() (*asset, error) {
 	return a, err
 }
 
-// assetsTmplMy_resultsHtml reads file data from disk. It returns an error on failure.
-func assetsTmplMy_resultsHtml() (*asset, error) {
-	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/my_results.html"
-	name := "assets/tmpl/my_results.html"
+// assetsTmplPagesMy_resultsHtml reads file data from disk. It returns an error on failure.
+func assetsTmplPagesMy_resultsHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/pages/my_results.html"
+	name := "assets/tmpl/pages/my_results.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -768,10 +901,10 @@ func assetsTmplMy_resultsHtml() (*asset, error) {
 	return a, err
 }
 
-// assetsTmplScheduleHtml reads file data from disk. It returns an error on failure.
-func assetsTmplScheduleHtml() (*asset, error) {
-	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/schedule.html"
-	name := "assets/tmpl/schedule.html"
+// assetsTmplPagesScheduleHtml reads file data from disk. It returns an error on failure.
+func assetsTmplPagesScheduleHtml() (*asset, error) {
+	path := "/home/andrew/go/src/github.com/acsellers/my_multi_event/assets/tmpl/pages/schedule.html"
+	name := "assets/tmpl/pages/schedule.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -868,16 +1001,23 @@ var _bindata = map[string]func() (*asset, error){
 	"assets/font/roboto/Roboto-Thin.woff2": assetsFontRobotoRobotoThinWoff2,
 	"assets/js/angular-materialize.js": assetsJsAngularMaterializeJs,
 	"assets/js/angular.min.js": assetsJsAngularMinJs,
+	"assets/js/create-app.js": assetsJsCreateAppJs,
 	"assets/js/jquery-2.2.0.min.js": assetsJsJquery220MinJs,
+	"assets/js/lodash.js": assetsJsLodashJs,
 	"assets/js/materialize.js": assetsJsMaterializeJs,
 	"assets/js/materialize.min.js": assetsJsMaterializeMinJs,
+	"assets/js/picker.date.js": assetsJsPickerDateJs,
+	"assets/js/picker.js": assetsJsPickerJs,
+	"assets/js/picker.time.js": assetsJsPickerTimeJs,
+	"assets/js/schedule.js": assetsJsScheduleJs,
+	"assets/tmpl/base/index.html": assetsTmplBaseIndexHtml,
 	"assets/tmpl/create.html": assetsTmplCreateHtml,
-	"assets/tmpl/index.html": assetsTmplIndexHtml,
-	"assets/tmpl/landing.html": assetsTmplLandingHtml,
-	"assets/tmpl/modify.html": assetsTmplModifyHtml,
-	"assets/tmpl/my_events.html": assetsTmplMy_eventsHtml,
-	"assets/tmpl/my_results.html": assetsTmplMy_resultsHtml,
-	"assets/tmpl/schedule.html": assetsTmplScheduleHtml,
+	"assets/tmpl/pages/create.html": assetsTmplPagesCreateHtml,
+	"assets/tmpl/pages/landing.html": assetsTmplPagesLandingHtml,
+	"assets/tmpl/pages/modify.html": assetsTmplPagesModifyHtml,
+	"assets/tmpl/pages/my_events.html": assetsTmplPagesMy_eventsHtml,
+	"assets/tmpl/pages/my_results.html": assetsTmplPagesMy_resultsHtml,
+	"assets/tmpl/pages/schedule.html": assetsTmplPagesScheduleHtml,
 }
 
 // AssetDir returns the file names below a certain
@@ -960,18 +1100,29 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"js": &bintree{nil, map[string]*bintree{
 			"angular-materialize.js": &bintree{assetsJsAngularMaterializeJs, map[string]*bintree{}},
 			"angular.min.js": &bintree{assetsJsAngularMinJs, map[string]*bintree{}},
+			"create-app.js": &bintree{assetsJsCreateAppJs, map[string]*bintree{}},
 			"jquery-2.2.0.min.js": &bintree{assetsJsJquery220MinJs, map[string]*bintree{}},
+			"lodash.js": &bintree{assetsJsLodashJs, map[string]*bintree{}},
 			"materialize.js": &bintree{assetsJsMaterializeJs, map[string]*bintree{}},
 			"materialize.min.js": &bintree{assetsJsMaterializeMinJs, map[string]*bintree{}},
+			"picker.date.js": &bintree{assetsJsPickerDateJs, map[string]*bintree{}},
+			"picker.js": &bintree{assetsJsPickerJs, map[string]*bintree{}},
+			"picker.time.js": &bintree{assetsJsPickerTimeJs, map[string]*bintree{}},
+			"schedule.js": &bintree{assetsJsScheduleJs, map[string]*bintree{}},
 		}},
 		"tmpl": &bintree{nil, map[string]*bintree{
+			"base": &bintree{nil, map[string]*bintree{
+				"index.html": &bintree{assetsTmplBaseIndexHtml, map[string]*bintree{}},
+			}},
 			"create.html": &bintree{assetsTmplCreateHtml, map[string]*bintree{}},
-			"index.html": &bintree{assetsTmplIndexHtml, map[string]*bintree{}},
-			"landing.html": &bintree{assetsTmplLandingHtml, map[string]*bintree{}},
-			"modify.html": &bintree{assetsTmplModifyHtml, map[string]*bintree{}},
-			"my_events.html": &bintree{assetsTmplMy_eventsHtml, map[string]*bintree{}},
-			"my_results.html": &bintree{assetsTmplMy_resultsHtml, map[string]*bintree{}},
-			"schedule.html": &bintree{assetsTmplScheduleHtml, map[string]*bintree{}},
+			"pages": &bintree{nil, map[string]*bintree{
+				"create.html": &bintree{assetsTmplPagesCreateHtml, map[string]*bintree{}},
+				"landing.html": &bintree{assetsTmplPagesLandingHtml, map[string]*bintree{}},
+				"modify.html": &bintree{assetsTmplPagesModifyHtml, map[string]*bintree{}},
+				"my_events.html": &bintree{assetsTmplPagesMy_eventsHtml, map[string]*bintree{}},
+				"my_results.html": &bintree{assetsTmplPagesMy_resultsHtml, map[string]*bintree{}},
+				"schedule.html": &bintree{assetsTmplPagesScheduleHtml, map[string]*bintree{}},
+			}},
 		}},
 	}},
 }}

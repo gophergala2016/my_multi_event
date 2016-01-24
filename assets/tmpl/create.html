@@ -1,5 +1,58 @@
 {{ define "body" }}
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text" ng-model="step.title"></h1>
+      <h1 class="header center orange-text">What Kind of Event?</h1>
+      <br><br>
+    </div>
+  </div>
 
+
+  <div class="container">
+    <div class="section">
+      <div class="row" ng-show="step.event_type">
+        BlAH
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h5>Tall Event</h5>
+            <ul>
+              <li>Many attendees</li>
+              <li>1 Time</li>
+            </ul>
+            <a ng-click="selectType('tall')" class="waves-effect waves-light btn">Start</a>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h5>Hybrid Event</h5>
+            <ul>
+              <li>Several attendees per time</li>
+              <li>Multiple Times</li>
+            </ul>
+            <a ng-click="selectType('hybrid')" class="waves-effect waves-light btn">Start</a>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h5>Wide Event</h5>
+            <ul>
+              <li>Many attendees</li>
+              <li>1 Time per Attendee</li>
+            </ul>
+            <a ng-click="selectType('wide')" class="waves-effect waves-light btn">Start</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+  </div>
+{{ end }}
+
+{{ define "js" }}
+  <script src="/assets/js/angular.min.js"></script>
+  <script src="/assets/js/angular-materialize.js"></script>
+  <script src="/assets/js/create-app.js"></script>
 {{ end }}
 
 {{ template "index.html" . }}

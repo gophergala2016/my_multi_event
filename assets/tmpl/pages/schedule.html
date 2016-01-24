@@ -1,0 +1,60 @@
+{{ define "event_schedule" }}
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">{{ .Name }}</h1>
+      <br><br>
+    </div>
+  </div>
+
+  {{ if .Instructions }}
+    <div id="instructions">
+      <pre>
+        {{ .Instructions }}
+      </pre>
+      <a href="#" id="instructions_next">Understood</a>
+    </div>
+  {{ end }}
+
+  {{ if .Questions }}
+    <div id="questions">
+      Questions
+    </div>
+  {{ end }}
+
+  <div id="review">
+    Review
+  </div>
+
+  <div id="done">
+    Done
+  </div>
+{{ end }}
+
+
+{{ define "body" }}
+
+  {{ if .Event }}
+    {{ template "event_schedule" .Event }}
+  {{ else }}
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br><br>
+        <h1 class="header center orange-text">Cannot Locate Event</h1>
+        <br><br>
+      </div>
+    </div>
+  {{ end }}
+{{ end }}
+
+{{ define "js" }}
+  <script type="text/javascript" src="/assets/js/schedule.js"></script>
+{{ end }}
+
+{{ define "css" }}
+  #questions, #review, #done {
+    display: none;
+  }
+{{ end }}
+
+{{ template "index.html" . }}

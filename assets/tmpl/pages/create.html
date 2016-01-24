@@ -1,0 +1,229 @@
+{{ define "body" }}
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text" ng-bind="step.title"></h1>
+      <br><br>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+      {{ template "event_type" . }}
+      {{ template "event_when_single" . }}
+      {{ template "event_instructions" . }}
+      {{ template "event_questions" . }}
+      {{ template "event_review" . }}
+      {{ template "event_done" . }}
+    </div>
+    <br><br>
+  </div>
+{{ end }}
+
+{{ define "css" }}
+  i.material-icons.clickable {
+    cursor: pointer;
+  }
+{{ end }}
+
+{{ define "js" }}
+  <script src="/assets/js/picker.js"></script>
+  <script src="/assets/js/picker.date.js"></script>
+  <script src="/assets/js/picker.time.js"></script>
+  <script src="/assets/js/angular.min.js"></script>
+  <script src="/assets/js/lodash.js"></script>
+  <script src="/assets/js/angular-materialize.js"></script>
+  <script src="/assets/js/create-app.js"></script>
+{{ end }}
+
+{{ template "index.html" . }}
+
+{{ define "event_type" }}
+  <div class="row" ng-show="step.key == 'event_type'">
+    <div class="input-field col s12">
+      <input type="text" ng-model="eventData.name" class="validate" placeholder="Awesome Fun Night">
+      <label>What's the Name of the Event</label>
+    </div>
+  </div>
+  <div class="row" ng-show="step.key == 'event_type'">
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h5>Tall Event</h5>
+        <ul>
+          <li>Many attendees</li>
+          <li>1 Time</li>
+        </ul>
+        <a ng-click="setType('tall')" class="waves-effect waves-light btn">Start</a>
+      </div>
+    </div>
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h5>Hybrid Event</h5>
+        <ul>
+          <li>Several attendees per time</li>
+          <li>Multiple Times</li>
+        </ul>
+        <a ng-click="setType('hybrid')" class="waves-effect waves-light btn">Start</a>
+      </div>
+    </div>
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h5>Wide Event</h5>
+        <ul>
+          <li>Many attendees</li>
+          <li>1 Time per Attendee</li>
+        </ul>
+        <a ng-click="setType('wide')" class="waves-effect waves-light btn">Start</a>
+      </div>
+    </div>
+  </div>
+{{ end }}
+
+{{ define "event_when_single" }}
+<div ng-show="step.key == 'event_when_single'">
+  <div class="row">
+    <div class="input-field col s12">
+      <input type="text" class="datepicker_mod" ng-model="eventData.date">
+      <label>Time of Event</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12 m6">
+      <input type="text" class="timepicker_mod" ng-model="eventData.startTime">
+      <label>Start Time of Event</label>
+    </div>
+
+    <div class="input-field col s12 m6">
+      <input type="text" class="timepicker_mod" ng-model="eventData.endTime">
+      <label>End Time of Event</label>
+    </div>
+  </div>
+  <a ng-click="selectSingleTime()" class="right waves-effect waves-light btn">That's My Time</a>
+</div>
+{{ end }}
+
+{{ define "event_instructions" }}
+<div ng-show="step.key == 'event_instructions'">
+  <div class="row">
+    <div class="input-field col s12">
+      <textarea id="instructions" class="materialize-textarea" ng-model="eventData.instructions">
+      </textarea>
+      <label for="instructions">What should your Attendees know?</label>
+    </div>
+  </div>
+  <a ng-click="setInstructions('blank')" class="left waves-effect waves-light btn">I Don't Want Instructions</a>
+  <a ng-click="setInstructions()" class="right waves-effect waves-light btn">OK, Done Writing Instructions</a>
+</div>
+{{ end }}
+
+{{ define "event_questions" }}
+<div ng-show="step.key == 'event_questions'">
+  <div ng-repeat="question in eventData.questions">
+    <div class="row">
+      <div class="input-field col s12 m4">
+        <input type="text" ng-model="question.title">
+        <label>Name of the Question</label>
+      </div>
+      <div class="input-field col s12 m2">
+        <input id="require_[[question.key]]" type="checkbox" ng-model="question.required">
+        <label for="require_[[question.key]]">Response Required?</label>
+      </div>
+      <div class="input-field col s12 m4">
+        <select ng-model="question.type" material-select>
+          <option value="text">Text</option>
+          <option value="textarea">Text Area</option>
+          <option value="select">1 Choice from List</option>
+          <option value="checkbox">Multiple Choices from List</option>
+        </select>
+        <label>Format of the Question</label>
+      </div>
+      <div class="input-field col s12 m2">
+        <i class="small material-icons clickable" ng-click="questionUp(question.key)">expand_less</i>
+        <i class="small material-icons clickable" ng-click="questionDown(question.key)">expand_more</i>
+        <i class="small material-icons clickable" ng-click="questionDelete(question.key)">cancel</i>
+      </div>
+    </div>
+  </div>
+  <a ng-click="newQuestion()" class="left waves-effect waves-light btn">Add Another Question</a>
+  <a ng-click="setQuestions()" class="right waves-effect waves-light btn">OK, Questions are Done</a>
+</div>
+{{ end }}
+
+{{ define "event_review" }}
+  <div ng-show="step.key == 'event_review'">
+    <div class="row">
+      <div class="input-field col s12 m8">
+        <input type="text" ng-model="eventData.name" id="eventName">
+        <label>Event Name</label>
+      </div>
+      <div class="input-field col s12 m4">
+        <select ng-model="eventData.event_type" material-select disabled>
+          <option value="tall">Tall</option>
+          <option value="hybrid">Hybrid</option>
+          <option value="wide">Wide</option>
+        </select>
+        <label>Event Type</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 m4">
+        <input type="text" ng-model="eventData.date">
+      </div>
+      <div class="input-field col s12 m4">
+        <input type="text" ng-model="eventData.startTime">
+      </div>
+      <div class="input-field col s12 m4">
+        <input type="text" ng-model="eventData.endTime">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea id="instructions_review" class="materialize-textarea" ng-model="eventData.instructions" placeholder="No Instructions Provided">
+        </textarea>
+      <label for="instructions">Instructions</label>
+      </div>
+    </div>
+    <div ng-repeat="question in eventData.questions">
+      <div class="row">
+        <div class="input-field col m4 s12">
+          <input type="text" ng-model="question.title">
+          <label>Question Name</label>
+        </div>
+        <div class="input-field col m4 s12">
+          <input id="review_[[question.key]]" type="checkbox" ng-model="question.required">
+          <label for="review_[[question.key]]">Question Required?</label>
+        </div>
+        <div class="input-field col m4 s12">
+          <select ng-model="question.type" material-select>
+            <option value="text">Text</option>
+            <option value="textarea">Text Area</option>
+            <option value="select">1 Choice from List</option>
+            <option value="checkbox">Multiple Choices from List</option>
+          </select>
+          <label>Question Type</label>
+        </div>
+      </div>
+    </div>
+    <a ng-click="saveEvent()" class="right waves-effect waves-light btn">OK, Make My Event</a>
+  </div>
+{{ end }}
+
+{{ define "event_done" }}
+  <div ng-show="step.key == 'event_done'">
+    <ul>
+      <li>
+        Link to Event:
+        <a href="/schedule?event_id=[[eventKey]]">www.somedomainname.com/schedule/[[eventKey]]</a>
+      </li>
+      <li>
+        Link to Edit Event:
+        <a href="/modify?event_id=[[eventKey]]">Coming Soon</a>
+      </li>
+      <li>
+        Link to Results:
+        <a href="/results?event_id=[[eventKey]]">Coming Soon</a>
+      </li>
+    </ul>
+  </div>
+{{ end }}

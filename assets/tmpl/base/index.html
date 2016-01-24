@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+{{ if .NGApp }}
+  <html lang="en" ng-app="{{ .NGApp }}">
+{{ else }}
+  <html lang="en">
+{{ end }}
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>My Multi Event</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="/assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="/assets/js/materialize.js"></script>
   <style>
     body {
       display: flex;
@@ -20,9 +22,18 @@
     main {
       flex: 1 0 auto;
     }
+    {{ block "css" . }} {{ end }}
   </style>
+
+  <script src="/assets/js/jquery-2.2.0.min.js"></script>
+  <script src="/assets/js/materialize.js"></script>
+  {{ block "js" . }} {{ end }}
 </head>
-<body>
+{{ if .NGCtrl }}
+  <body ng-controller="{{ .NGCtrl }}">
+{{ else }}
+  <body>
+{{ end }}
   <header>
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">My Multi Event</a>
