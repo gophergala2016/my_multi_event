@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io"
 	"net/http"
 	"os"
 	"strings"
@@ -78,6 +80,14 @@ func CreatePage(w http.ResponseWriter, r *http.Request) {
 }
 func ResultsPage(w http.ResponseWriter, r *http.Request) {
 	InitTmpl()
+	id := r.URL.Query().Get("event_id")
+	event, ok := Store.GetEvent(id)
+	if ok {
+		Tmpl["schedule.html"].ExecuteTemplate(w, "schedule.html", map[string]interface{}{"Event": event})
+	} else {
+		Tmpl["schedule.html"].ExecuteTemplate(w, "schedule.html", nil)
+	}
+
 	Tmpl["my_results.html"].ExecuteTemplate(w, "my_results.html", nil)
 }
 func ModifyPage(w http.ResponseWriter, r *http.Request) {
@@ -119,7 +129,10 @@ func SaveResponse(w http.ResponseWriter, r *http.Request) {
 		Created: time.Now(),
 		Answers: []string{},
 	}
-	json.NewDecoder(r.Body).Decode(&resp.Answers)
+	b := bytes.Buffer{}
+	io.Copy(&b, r.Body)
+	fmt.Println(b.String())
+	json.NewDecoder(&b).Decode(&resp)
 	Store.NewResponse(r.URL.Query().Get("event_id"), resp)
 	json.NewEncoder(w).Encode(map[string]string{
 		"response": "ok",

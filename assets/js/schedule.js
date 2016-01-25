@@ -16,15 +16,16 @@ $(document).ready(function() {
       var event_id = location.search.split('=')[1];
       var data = [];
       $("#schedule").serializeArray().forEach(function(el){ data.push(el.value) })
-      $.post(
-        "/create_response?event_id="+event_id,
-        data,
-        function(resp) {
+      $.ajax({
+        method: "POST",
+        url: "/create_response?event_id="+event_id,
+        data: JSON.stringify({answers: data}),
+        success: function(resp) {
           $("#done").show();
           $("#questions").hide();
         },
-        "json"
-      );
+        dataType: "json"
+      });
       $("#questions_next").disable();
     }
   });
