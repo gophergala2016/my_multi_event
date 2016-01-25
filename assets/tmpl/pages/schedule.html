@@ -3,31 +3,45 @@
     <div class="container">
       <br><br>
       <h1 class="header center orange-text">{{ .Name }}</h1>
+      <h4 class="center">{{ .Date}} {{ .StartTime }}-{{ .EndTime }}</h4>
       <br><br>
     </div>
   </div>
 
-  {{ if .Instructions }}
-    <div id="instructions">
-      <pre>
-        {{ .Instructions }}
-      </pre>
-      <a href="#" id="instructions_next">Understood</a>
+  <div class="container row">
+    <div class="col s12">
+      {{ if .Instructions }}
+        <div id="instructions">
+          <pre>
+            {{ .Instructions }}
+          </pre>
+          <a href="#" id="instructions_next">Understood</a>
+        </div>
+      {{ end }}
+
+      {{ if .Questions }}
+        <div id="questions">
+          <form id="schedule">
+            {{ range .Questions }}
+              <div class="row"><div class="input-field col s12">
+                {{ if eq .Type "text" }}
+                <input name="{{ .Key }}" id="{{.Key}}" type="text" {{ if .Required }}class="validate"{{ end }}>
+                {{ end }}
+                {{ if eq .Type "textarea" }}
+                <textarea name="{{ .Key }}" id="{{.Key}}" {{ if .Required }}class="validate"{{ end }}></textarea>
+                {{ end }}
+                <label for="{{.Key}}">{{ .Title }}</label>
+              </div></div>
+            {{ end }}
+          </form>
+          <a class="waves-effect waves-light btn right" href="#" id="questions_next">Filled in things</a>
+        </div>
+      {{ end }}
+
+      <div id="done">
+        <h2 class="center">Thanks</h2>
+      </div>
     </div>
-  {{ end }}
-
-  {{ if .Questions }}
-    <div id="questions">
-      Questions
-    </div>
-  {{ end }}
-
-  <div id="review">
-    Review
-  </div>
-
-  <div id="done">
-    Done
   </div>
 {{ end }}
 

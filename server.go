@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 var Tmpl map[string]*template.Template
@@ -114,9 +115,12 @@ func SaveEvent(w http.ResponseWriter, r *http.Request) {
 	})
 }
 func SaveResponse(w http.ResponseWriter, r *http.Request) {
-	evt := Response{}
-	json.NewDecoder(r.Body).Decode(&evt)
-	Store.NewResponse(r.URL.Query().Get("event_id"), evt)
+	resp := Response{
+		Created: time.Now(),
+		Answers: []string{},
+	}
+	json.NewDecoder(r.Body).Decode(&resp.Answers)
+	Store.NewResponse(r.URL.Query().Get("event_id"), resp)
 	json.NewEncoder(w).Encode(map[string]string{
 		"response": "ok",
 	})
